@@ -1,0 +1,46 @@
+hr {
+    min-height: 100%;
+    width: 2px;
+  }
+  a:hover{
+    color: #ff7f50;
+  }
+  .cityName {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .cityTemp {
+    text-align: center;
+    font-size: 72px;
+    font-weight: 500;
+  }
+  .cityDegrees {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 500;
+  }
+  .cityCondition {
+    text-align: center;
+    font-size: 72px;
+    font-weight: 500;
+  }
+  .forecastName {
+    font-size: 24px;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .forecast {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .sunsun {
+    color: darkorange;
+  }
+  .timeofDay {
+    text-align: center;
+    font-size: 12px;
+  }
+  
