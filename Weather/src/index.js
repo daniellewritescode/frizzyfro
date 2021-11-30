@@ -20,15 +20,22 @@ let currentTimeCalc = (`${currentDay}, ${currentMonth} ${currentDate}, ${current
 ${currentHours}:${currentMinutes} ET`);
 let currentTime = document.querySelector(".timeofDay");
 currentTime.innerHTML = `${currentTimeCalc}`;
+let apiKey = "f221ad1bc52d44e22fdecebbd007fb29";
+let units = "imperial";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Philadelphia&units=${units}&appid=${apiKey}`;
+axios.get(apiUrl).then(displayCityweather);
+//let h1 = document.querySelector(".cityTempn")
+//h1.innerHTML= `${cityTemp}`; 
+//let cityTempvar = document.querySelector(h1.innerHTML);
+
 
 function convertTemp(event){
   event.preventDefault();
   let currentCityTemp = document.querySelector(".cityTemp");
-  let currentCityDegrees = document.querySelector(".fLink");
-  
-  console.log(currentCityDegrees)
+  //let currentCityDegrees = document.querySelector(".fLink");
   
     let farenheitCalc = document.querySelector(".cityTemp");
+  //farenheitCalc.innerHTML = `${Math.round(h1.innerHTML* 1.8 + 32)}\xB0F`;
   farenheitCalc.innerHTML = `${Math.round(17* 1.8 + 32)}\xB0F`;
     currentCityTemp.document = `${farenheitCalc}`;
    
@@ -37,15 +44,14 @@ function convertTemp(event){
     function convertCelsius(event){
       event.preventDefault();
       let currentCityTemp = document.querySelector(".cityTemp");
-      let currentCityDegrees = document.querySelector("#cLink");
-      console.log(currentCityDegrees)
-      
+      //let currentCityDegrees = document.querySelector("#cLink");
+    
     let celsiusCalc = document.querySelector(".cityTemp");
+    //celsiusCalc.innerHTML= (`${(Math.round(h1.innerHTML -32)/1.8)}\u00B0C`);
     celsiusCalc.innerHTML= (`${Math.round((63 -32)/1.8)}\u00B0C`);
       currentCityTemp.document = `${celsiusCalc}`; 
  
     }
-  
 
       let a = document.querySelector("a");
       a.addEventListener("click", convertTemp);
@@ -53,7 +59,6 @@ function convertTemp(event){
       let otherClass = document.querySelector("#cLink");
       otherClass.addEventListener("click", convertCelsius);
 
-       
 
       function userCoordinates(position){
         let getLat = position.coords.latitude;
@@ -61,41 +66,23 @@ function convertTemp(event){
         let apiKey = "f221ad1bc52d44e22fdecebbd007fb29";
         let units = "imperial";
         let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${getLat}&lon=${getLon}&units=${units}&appid=${apiKey}`;
-        console.log(position.coords.latitude);
-        console.log(position.coords.longitude);
          
         axios.get(apiUrl).then(displayCityweather);
           }
-      
-  /*         function displayCityweather(response) {
-      let cityTemp = Math.round(response.data.main.temp);
-      let cityName = response.data.name;
-      console.log(cityTemp)
-      console.log(cityName)
-      let h1 = document.querySelector("h1");
-      h1.innerHTML= `The current temperature is ${cityTemp}`;
-      }
-      
-      navigator.geolocation.getCurrentPosition(userCoordinates);
-
-      function citySearch(event){
-        event.preventDefault();
-        let cName = document.querySelector(".form-control");
-        let searchedCity = document.querySelector("#cityChange");
-        searchedCity.innerHTML = cName.value
-      } */
 
       function displayCityweather(response) {
         let cityTemp = Math.round(response.data.main.temp);
         let cityName = response.data.name;
-        let cName = cityName
+        let wDescription = response.data.weather[0].description;
+        let feelsLike = Math.round(response.data.main.feels_like);
+        let wIcon = response.data.weather[0].icon;
+        let windSpeed = Math.round(response.data.wind.speed);
         let h1 = document.querySelector(".cityTempn");  
-        //let cityName = document.querySelector(".form-control");
+        let cityDescription = document.querySelector(".cityCondition");
+        cityDescription.innerHTML=`${wDescription}<br> Feels like: ${feelsLike}&#176; \xB0F <br> Wind Speed:${windSpeed}mph <br> ${wIcon}`;
           let searchedCity = document.querySelector("#cityChange");
           searchedCity.innerHTML = `${cityName}`;
           h1.innerHTML= `${cityTemp}`;
-           //let searchedCity = document.querySelector("#cityChange");
-          //searchedCity.innerHTML = cName.value 
         }
         
         function findCoords(){
@@ -115,13 +102,4 @@ function convertTemp(event){
          
           axios.get(apiUrl).then(displayCityweather);
 
-         
         }
-
-        /* Requirements: When a user searches for a city (example: New York), it should 
-          1. display the name of the city on the result page
-          2. display the current temperature of the city.
-
-        Bonus point:
-        Add a Current Location button using the Geolocation API. 
-        display the city and current temperature */
