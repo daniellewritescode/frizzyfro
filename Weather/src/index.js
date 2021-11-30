@@ -79,7 +79,8 @@ function convertTemp(event){
         let windSpeed = Math.round(response.data.wind.speed);
         let h1 = document.querySelector(".cityTempn");  
         let cityDescription = document.querySelector(".cityCondition");
-        cityDescription.innerHTML=`${wDescription}<br> Feels like: ${feelsLike}&#176; \xB0F <br> Wind Speed:${windSpeed}mph <br> ${wIcon}`;
+        console.log(wIcon)
+        cityDescription.innerHTML=`<img src=http://openweathermap.org/img/wn/${wIcon}@2x.png> <br>${wDescription}<br> Feels Like: ${feelsLike}&#176; \xB0F <br> Wind Speed: ${windSpeed}MPH`;
           let searchedCity = document.querySelector("#cityChange");
           searchedCity.innerHTML = `${cityName}`;
           h1.innerHTML= `${cityTemp}`;
