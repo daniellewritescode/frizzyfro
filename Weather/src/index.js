@@ -18,7 +18,9 @@
       let wDescription = response.data.weather[0].description;
       let feelsLike = Math.round(response.data.main.feels_like);
       let wIcon = response.data.weather[0].icon;
-      let windSpeed = Math.round(response.data.wind.speed);        
+      let windSpeed = Math.round(response.data.wind.speed); 
+      let lon = response.data.coord.lon;
+      let lat = response.data.coord.lat;    
       let h1 = document.querySelector(".cityTemp");  
         h1.innerHTML= `${cityTemp}&#176; F`;
       let cityDescription = document.querySelector(".cityCondition");
@@ -26,8 +28,50 @@
       let searchedCity = document.querySelector("#cityChange");
           searchedCity.innerHTML = `${cityName}`;
           fTemp = Math.round(response.data.main.temp);
+
+      cityCoordinates(lon,lat);
      }
         
+function cityCoordinates(lon,lat){
+  let apiKey = "f221ad1bc52d44e22fdecebbd007fb29";
+      let units = "imperial";
+      let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=${units}&appid=${apiKey}`;
+      axios.get(apiUrl).then(displayCityForecast);
+  
+}
+function displayCityForecast(response){
+  let fDay = response.data.daily[0].dt*1000;
+  let fSunrise = response.data.daily[0].sunrise*1000;
+  let fSunset= response.data.daily[0].sunset*1000;
+  let fHtemp = response.data.daily[0].temp.max;
+  let fLtemp = response.data.daily[0].temp.min;
+  let fwdesc = response.data.daily[0].weather[0].description;
+  let fwicon = response.data.daily[0].weather[0].icon;
+
+let daysofWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+let forecastedDate = new Date(fDay);
+let forecastedSunrise = new Date(fSunrise);
+let forecastedSunset = new Date(fSunset);
+let forecastedDay = daysofWeek[forecastedDate.getDay(fDay)];
+let forecastedSRHour = forecastedSunrise.getHours(fSunrise);
+let forecastedSSHour = forecastedSunset.getHours(fSunset);
+  console.log(response) 
+  console.log("fDay "+fDay)
+  console.log("fSunrise "+fSunrise)
+  console.log("fsunSet "+fSunset)
+  console.log(`Hi Temp ${fHtemp}`) 
+  console.log(`Low Temp ${fLtemp}`) 
+  console.log(`Description ${fwdesc}`) 
+  console.log(`Icon ${fwicon}`)
+  console.log("forecastedDay "+forecastedDay)
+  console.log("forecastedDate "+forecastedDate)
+  console.log("forecastedSunrise "+forecastedSunrise)
+  console.log(`forecastedSunrise Time ${forecastedSRHour}:${forecastedSunrise.getMinutes(fSunrise)}`)
+  console.log("forecastedSunset "+forecastedSunset)
+  console.log(`forecastedSunset Time ${forecastedSSHour}:${forecastedSunset.getMinutes(fSunset)}`)
+
+
+}
     function convertTemp(event){
       event.preventDefault();          
       let farenheitCalc = document.querySelector(".cityTemp");
