@@ -1,7 +1,7 @@
 
     function citySearch(event){
       event.preventDefault();
-      let cName = document.querySelector(".form-control");
+      let cName = document.querySelector(".form-control-sm");
       let searchedCity = document.querySelector("#cityChange");
       searchedCity.innerHTML = cName.value
 
@@ -40,50 +40,57 @@ function cityCoordinates(lon,lat){
   
 }
 function displayCityForecast(response){
-  let fDay = response.data.daily[0].dt*1000;
-  let fSunrise = response.data.daily[0].sunrise*1000;
-  let fSunset= response.data.daily[0].sunset*1000;
-  let fHtemp = response.data.daily[0].temp.max;
-  let fLtemp = response.data.daily[0].temp.min;
-  let fwdesc = response.data.daily[0].weather[0].description;
-  let fwicon = response.data.daily[0].weather[0].icon;
+    let forecast = response.data.daily
+    let fiveDayForecast = document.querySelector(".forecaststuff");
+    
+    let forecastHTML = `<div class="row">`;
 
-let daysofWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-let forecastedDate = new Date(fDay);
-let forecastedSunrise = new Date(fSunrise);
-let forecastedSunset = new Date(fSunset);
-let forecastedDay = daysofWeek[forecastedDate.getDay(fDay)];
-let forecastedSRHour = forecastedSunrise.getHours(fSunrise);
-let forecastedSSHour = forecastedSunset.getHours(fSunset);
-  console.log(response) 
-  console.log("fDay "+fDay)
-  console.log("fSunrise "+fSunrise)
-  console.log("fsunSet "+fSunset)
-  console.log(`Hi Temp ${fHtemp}`) 
-  console.log(`Low Temp ${fLtemp}`) 
-  console.log(`Description ${fwdesc}`) 
-  console.log(`Icon ${fwicon}`)
-  console.log("forecastedDay "+forecastedDay)
-  console.log("forecastedDate "+forecastedDate)
-  console.log("forecastedSunrise "+forecastedSunrise)
-  console.log(`forecastedSunrise Time ${forecastedSRHour}:${forecastedSunrise.getMinutes(fSunrise)}`)
-  console.log("forecastedSunset "+forecastedSunset)
-  console.log(`forecastedSunset Time ${forecastedSSHour}:${forecastedSunset.getMinutes(fSunset)}`)
+    forecast.forEach(function (forecastedDow, index) {
+      let fDow = forecastedDow.dt*1000;
+      let forecastedDate = new Date((fDow));
+      let daysofWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+      let forecastedDay = daysofWeek[forecastedDate.getDay(forecastedDow)];
+      let fSunrise = forecastedDow.sunrise*1000;
+      let fSunset= forecastedDow.sunset*1000;
+    let forecastedSunrise = new Date(fSunrise);
+    let forecastedSunset = new Date(fSunset);
+    let fSRHour = forecastedSunrise.getHours(fSunrise);
+    let fSSHour = forecastedSunset.getHours(fSunset);
+    let fSRMin = forecastedSunrise.getMinutes(fSunrise);
+    let fSSMin = forecastedSunset.getMinutes(fSunset);
+
+      if (index < 5) {
+        forecastHTML =
+          forecastHTML +
+          `
+          <div class="col forecast">${forecastedDay} <br>
+          <img
+          src="http://openweathermap.org/img/wn/${
+            forecastedDow.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="42"
+        /><br>
+            <span> High: ${Math.round(
+              forecastedDow.temp.max
+            )}° <br>
+            Low: ${Math.round(
+              forecastedDow.temp.min
+            )}° <br>
+            Sunrise: ${fSRHour}:${fSRMin} <br>
+            Sunset: ${fSSHour}:${fSSMin}
+            </span>
+          </div>
+    `;
+            }
+    forecastHTML = forecastHTML + `</div>`;
+    fiveDayForecast.innerHTML = forecastHTML;
+   
+  })
+    
+};  
 
 
-}
-    function convertTemp(event){
-      event.preventDefault();          
-      let farenheitCalc = document.querySelector(".cityTemp");
-        farenheitCalc.innerHTML = `${fTemp}\xB0F`; 
-     }
-          
-    function convertCelsius(event){
-      event.preventDefault(); 
-      let celsiusCalc = document.querySelector(".cityTemp");
-      let makeitCelsius = Math.round((fTemp-32)/1.8);
-      celsiusCalc.innerHTML= `${makeitCelsius} \u00B0C`;
-      }
     
 let monthsofYear = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 let daysofWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
@@ -94,7 +101,7 @@ let currentHours = now.getHours();
 let currentMinutes = now.getMinutes();
 let currentDate = now.getDate();
 let currentYear = now.getFullYear();
-let currentTimeCalc = (`${currentDay}, ${currentMonth} ${currentDate}, ${currentYear} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+let currentTimeCalc = (`${currentDay}, ${currentMonth} ${currentDate}, ${currentYear} <br>
 ${currentHours}:${currentMinutes} ET`);
 let currentTime = document.querySelector(".timeofDay");
 currentTime.innerHTML = `${currentTimeCalc}`;
@@ -106,9 +113,3 @@ axios.get(apiUrl).then(displayCityweather);
 
 let submitform = document.querySelector("form");
 submitform.addEventListener("submit", citySearch);
-
-let a = document.querySelector("#fLink");
-a.addEventListener("click", convertTemp);
-
-let otherClass = document.querySelector("#cLink");
-otherClass.addEventListener("click", convertCelsius);

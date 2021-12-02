@@ -16,107 +16,46 @@
   </head>
   <body>
     <div class="container">
+      <div class="wrapper">
       <div class="row">
-        <div class="col-12">&nbsp;</div>
+        <div class="col header">Weather Search by City</div>
       </div>
       <div class="row">
-        <div class="col-12">&nbsp;</div>
-      </div>
-
-      <div class="row">
-        <div class="col-2">&nbsp;</div>
-        <div class="mb-3 col-3"><form><input type="search" class="form-control" placeholder="City Search" />
-         
+        <div class="mb-3">
+          <form><center><input type="search" class="form-control-sm" placeholder="Enter a City i.e. Miami"/> 
+            <button type="submit" class="btn btn-primary btn-sm">Search</button></center></form>
         </div>
-        <div class="col">
-          <button type="submit" class="btn btn-primary btn-sm">Search</button></form>
      </div>
-        <div class="col-1">&nbsp;</div>
-        <div class="col-4 forecastName">5-Day Forecast</div>
+
+      <div class="row">
+        <div class="col hstack">        
+          <div class="col vstack">
+          <div class="cityName" id="cityChange"></div>
+          <div class="cityTemp"><span class="cityTempn">&#176; F</span></div>
+          </div>
+          <div class="col"><div class="cityCondition"></div></div></div>
+
+      </div>
+      <div class="row">
+        <div class="col">&nbsp;</div>
+      </div>
+        <div class="forecaststuff hstack"></div>
+      <div class="row">
         <div class="col">&nbsp;</div>
       </div>
 
       <div class="row">
-        <div class="col-2">&nbsp;</div>
-        <div class="col-4">
-          <div class="vstack gap-4">
-            <div class="cityName" id="cityChange"></div>
-            <div class="cityTemp"><span class="cityTempn">&#176; F</span></div>
-            <div class="cityDegrees"><a id="fLink"href="#">F</a>|<a id="cLink" href="#">C</a></div>
-            <div class="cityCondition"></div>
-              
-          </div>
+        <div class="col timeofDay">
         </div>
-        <div class="col"><hr /></div>
-        <div class="col">
-          <div class="vstack gap-5">
-            <div class="forecast">Monday</div>
-            <div class="forecast">Tuesday</div>
-            <div class="forecast">Wednesday</div>
-            <div class="forecast">Thursday</div>
-            <div class="forecast">Friday</div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="vstack gap-5">
-            <div class="forecast">72 &#176;</div>
-            <div class="forecast">70 &#176;</div>
-            <div class="forecast">72 &#176;</div>
-            <div class="forecast">74 &#176;</div>
-            <div class="forecast">78 &#176;</div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="vstack gap-5">
-            <div class="forecast">
-              <i class="fas fa-sun sunsun"></i>
-            </div>
-            <div class="forecast">
-              <i class="fas fa-sun sunsun"></i>
-            </div>
-            <div class="forecast">
-              <i class="fas fa-sun sunsun"></i>
-            </div>
-            <div class="forecast">
-              <i class="fas fa-sun sunsun"></i>
-            </div>
-            <div class="forecast">
-              <i class="fas fa-sun sunsun"></i>
-            </div>
-          </div>
-        </div>
-        <div class="col">&nbsp;</div>
       </div>
 
       <div class="row">
-        <div class="col-12">&nbsp;</div>
-      </div>
-
-      <div class="row">
-        <div class="col-12"></div>
-      </div>
-
-      <div class="row">
-        <div class="col-12 timeofDay">
-          &nbsp;
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">&nbsp;</div>
-      </div>
-      <div class="row">
-        <div class="col-12">&nbsp;</div>
-      </div>
-      <div class="row">
-        <div class="col-12 codedBy">
+        <div class="col codedBy">
           <span><a href="https://github.com/daniellewritescode/shecodes">Coded by</a> Danielle</span>
         </div>
       </div>
     </div>
-    <script
-      src="https://kit.fontawesome.com/07d327052c.js"
-      crossorigin="anonymous"
-    ></script>
+  </div>
     <script src="src/index.js"></script>
     
   </body>

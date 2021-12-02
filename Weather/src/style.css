@@ -7,38 +7,29 @@ hr {
   }
   .cityName {
     text-align: center;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 500;
+    padding-bottom: 0px;
+    padding-top: 50px;
+
   }
   .cityTemp {
     text-align: center;
-    font-size: 36px;
-    font-weight: 500;
-  }
-  .cityDegrees {
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-  }
-  .cityCondition {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 500;
-  }
-  .forecastName {
     font-size: 24px;
-    padding: 20px;
-    text-align: center;
-    font-weight: bold;
+    font-weight: 500;
+    padding: 10px 0px;
   }
-  .forecast {
-    text-align: center;
+
+  .cityCondition {
+    text-align: left;
     font-size: 14px;
-    font-weight: bold;
   }
-  .sunsun {
-    color: darkorange;
+ 
+  .forecast {
+    text-align:center;
+    font-size: 12px;
   }
+
   .timeofDay {
     text-align: center;
     font-size: 12px;
@@ -46,4 +37,20 @@ hr {
 .codedBy {
   text-align: center;
   font-size: 12px;
+}
+.header {
+  text-align: center;
+  color: #d60397;
+  border: 1px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.wrapper {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid #94330d;
+  border-radius: 15px;
+  background-color: #ffe5da;
+  box-shadow: #d60397;
 }
