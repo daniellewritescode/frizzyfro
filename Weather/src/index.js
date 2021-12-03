@@ -58,6 +58,11 @@ function displayCityForecast(response){
     let fSSHour = forecastedSunset.getHours(fSunset);
     let fSRMin = forecastedSunrise.getMinutes(fSunrise);
     let fSSMin = forecastedSunset.getMinutes(fSunset);
+    if (fSSMin < 10) {
+      fSSMin = `0${fSSMin}`;}
+      if (fSRMin < 10) {
+        fSRMin = `0${fSRMin}`;}
+
 
       if (index < 5) {
         forecastHTML =
@@ -101,6 +106,8 @@ let currentHours = now.getHours();
 let currentMinutes = now.getMinutes();
 let currentDate = now.getDate();
 let currentYear = now.getFullYear();
+if (currentMinutes < 10) {
+  currentMinutes = `0${currentMinutes}`;}
 let currentTimeCalc = (`${currentDay}, ${currentMonth} ${currentDate}, ${currentYear} <br>
 ${currentHours}:${currentMinutes} ET`);
 let currentTime = document.querySelector(".timeofDay");
