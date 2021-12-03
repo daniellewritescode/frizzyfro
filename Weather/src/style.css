@@ -42,11 +42,11 @@
   padding: 10px;
 }
 .wrapper {
-  max-width: 500px;
+  max-width: 600px;
   margin: 30px auto;
   padding: 20px;
   border: 1px solid #94330d;
   border-radius: 15px;
   background-color: #ffe5da;
-  box-shadow: #d60397;
+  box-shadow: 6px 9px 11px -9px #d60397;
 }
